@@ -12,8 +12,8 @@ import (
     "github.com/shyaminayesh/tgbcr"
 )
 
-func Hello(message) {
-    fmt.Println(message)
+func Hello() {
+    fmt.Println("Hello")
 }
 
 func main() {
