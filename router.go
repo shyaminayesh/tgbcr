@@ -10,21 +10,17 @@ type Router struct {
 	}
 }
 
-type Context struct {
-	Request interface{}
-}
-
-type Handler func(c interface{})
+type HandlerFunc func(Context)
 type Child struct {
 	Path    string
-	Handler Handler
+	Handler HandlerFunc
 }
 
 func New() *Router {
 	return &Router{}
 }
 
-func (r *Router) Handle(path string, handler Handler) {
+func (r *Router) Handle(path string, handler HandlerFunc) {
 
 	if path == "" {
 		panic("Path must not be empty")
@@ -45,11 +41,7 @@ func (r *Router) Handle(path string, handler Handler) {
 
 }
 
-func (r *Router) Dispatch(text string, request interface{}) {
-
-	context := &Context{
-		Request: request,
-	}
+func (r *Router) Dispatch(text string, context Context) {
 
 	/**
 	* Sanitize and extract the command string from
