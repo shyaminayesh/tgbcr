@@ -19,6 +19,6 @@ func Hello(message) {
 func main() {
     Router := tgbcr.New()
     Router.Handle("/hello", Hello)
-    Router.Dispatch()
+    Router.Dispatch("/hello")
 }
 ```
