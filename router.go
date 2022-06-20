@@ -12,6 +12,8 @@ func New() *Router {
 
 func (r *Router) Handle(path string, handle Handler) {
 
+	fmt.Println(path)
+
 }
 
 func (r *Router) Dispatch() {
