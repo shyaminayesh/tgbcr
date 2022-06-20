@@ -6,8 +6,10 @@ import (
 
 func Test_Dispatch(t *testing.T) {
 
+	var request interface{}
+
 	router := New()
-	router.Handle("/hello", func() {})
-	router.Dispatch("/hello params")
+	router.Handle("/hello", func(r interface{}) {})
+	router.Dispatch("/hello params", request)
 
 }

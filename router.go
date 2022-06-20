@@ -9,7 +9,12 @@ type Router struct {
 		Childs []Child
 	}
 }
-type Handler func()
+
+type Context struct {
+	Request interface{}
+}
+
+type Handler func(c interface{})
 type Child struct {
 	Path    string
 	Handler Handler
@@ -40,7 +45,11 @@ func (r *Router) Handle(path string, handler Handler) {
 
 }
 
-func (r *Router) Dispatch(text string) {
+func (r *Router) Dispatch(text string, request interface{}) {
+
+	context := &Context{
+		Request: request,
+	}
 
 	/**
 	* Sanitize and extract the command string from
@@ -49,7 +58,7 @@ func (r *Router) Dispatch(text string) {
 	path := strings.Fields(text)[0]
 	for _, e := range r.Collection.Childs {
 		if e.Path == path {
-			e.Handler()
+			e.Handler(context)
 			return
 		}
 	}
